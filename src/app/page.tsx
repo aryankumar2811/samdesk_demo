@@ -29,14 +29,11 @@ export default function Home() {
           >
             <div className="max-w-5xl mx-auto">
               <h2
-                className="text-2xl font-semibold mb-2"
+                className="text-2xl font-semibold mb-8"
                 style={{ color: "var(--text-primary)", letterSpacing: "-0.02em" }}
               >
                 How it works
               </h2>
-              <p className="text-sm mb-8" style={{ color: "var(--text-muted)" }}>
-                Click any node to learn what that stage does.
-              </p>
               <Suspense
                 fallback={
                   <div

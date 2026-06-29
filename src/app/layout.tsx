@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Samdesk Demo by Aryan",
   description:
-    "Turning a flood of noisy signals into verified, decision-ready crisis intelligence — in seconds, with a human in the loop and a citation behind every claim.",
+    "Turning a flood of noisy signals into verified, decision-ready crisis intelligence, in seconds, with a human in the loop and a citation behind every claim.",
 };
 
 export default function RootLayout({

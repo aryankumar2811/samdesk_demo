@@ -15,7 +15,7 @@ const cards: Card[] = [
   {
     Icon: Zap,
     title: "Speed",
-    body: "The agent investigates and decides in seconds — watch it work in the live demo. Tool calls happen in real time: corroboration search, source reliability check, contradiction detection, asset exposure assessment.",
+    body: "The agent investigates and decides in seconds. Watch it work in the live demo. Tool calls happen in real time: corroboration search, source reliability check, contradiction detection, asset exposure assessment.",
   },
   {
     Icon: ShieldCheck,
@@ -25,7 +25,7 @@ const cards: Card[] = [
   {
     Icon: BarChart2,
     title: "Measured",
-    body: "Clustering precision/recall, classification F1 per event type, agent decision accuracy, false-verify rate, mean tool calls, grounding faithfulness, and p50/p95 latency — all computed over the labeled corpus, not vibes.",
+    body: "Clustering precision/recall, classification F1 per event type, agent decision accuracy, false-verify rate, mean tool calls, grounding faithfulness, and p50/p95 latency, all computed over the labeled corpus.",
   },
 ];
 

@@ -979,8 +979,12 @@ export function DemoConsole() {
 
                       {/* Brief */}
                       <p
-                        className="text-sm italic leading-relaxed mb-3"
-                        style={{ color: "var(--text-secondary)" }}
+                        className="text-sm leading-relaxed mb-3"
+                        style={{
+                          color: "var(--text-secondary)",
+                          borderLeft: "2px solid var(--border-strong)",
+                          paddingLeft: "12px",
+                        }}
                       >
                         {state.decision.brief}
                       </p>

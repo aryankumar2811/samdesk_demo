@@ -27,7 +27,7 @@ const NODES: NodeDef[] = [
     id: "sources",
     label: "Sources",
     description:
-      "Ingests from social media, news wires, official government alerts, weather sensors, and partner intelligence feeds — raw, noisy, and multilingual.",
+      "Ingests from social media, news wires, official government alerts, weather sensors, and partner intelligence feeds: raw, noisy, and multilingual.",
     x: 14,
     y: 48,
     w: 100,
@@ -47,7 +47,7 @@ const NODES: NodeDef[] = [
     id: "cluster",
     label: "Cluster",
     description:
-      "Groups related signals into incident candidates using TF-IDF cosine similarity, time windows, and geo proximity — without reading ground-truth labels.",
+      "Groups related signals into incident candidates using TF-IDF cosine similarity, time windows, and geo proximity, without reading ground-truth labels.",
     x: 282,
     y: 48,
     w: 100,
@@ -656,80 +656,95 @@ export default function ArchDiagram() {
         </svg>
       </div>
 
-      {/* ── Popover / tooltip ── */}
-      <AnimatePresence>
-        {selectedNodeDef && (
-          <motion.div
-            key={selectedNodeDef.id}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 6 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            style={{
-              marginTop: "12px",
-              padding: "14px 18px",
-              borderRadius: "10px",
-              backgroundColor: "var(--bg-elevated, #111722)",
-              border: `1px solid ${selectedNodeDef.isAgent ? "rgba(167,139,250,0.3)" : selectedNodeDef.isEval ? "rgba(155,166,184,0.2)" : "rgba(56,189,248,0.25)"}`,
-              boxShadow: selectedNodeDef.isAgent
-                ? "0 0 24px rgba(167,139,250,0.1)"
-                : "0 4px 24px rgba(0,0,0,0.4)",
-              maxWidth: "640px",
-            }}
-          >
-            <div
+      {/* ── Info panel (fixed height, no layout shift) ── */}
+      <div
+        style={{
+          marginTop: "16px",
+          height: "96px",
+          position: "relative",
+        }}
+      >
+        <AnimatePresence mode="wait">
+          {selectedNodeDef ? (
+            <motion.div
+              key={selectedNodeDef.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
               style={{
+                position: "absolute",
+                inset: 0,
+                padding: "14px 18px",
+                borderRadius: "10px",
+                backgroundColor: "var(--bg-elevated, #111722)",
+                border: `1px solid ${selectedNodeDef.isAgent ? "rgba(167,139,250,0.25)" : selectedNodeDef.isEval ? "rgba(155,166,184,0.15)" : "rgba(56,189,248,0.2)"}`,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "5px",
+                overflow: "hidden",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <span
+                  style={{
+                    fontFamily: "Inter, -apple-system, sans-serif",
+                    fontWeight: 600,
+                    fontSize: "12px",
+                    color: selectedNodeDef.isAgent ? "#C4B5FD" : selectedNodeDef.isEval ? "#9BA6B8" : "#38BDF8",
+                    letterSpacing: "0.02em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {selectedNodeDef.label}
+                </span>
+                <button
+                  onClick={() => setSelectedNode(null)}
+                  aria-label="Close"
+                  style={{ background: "none", border: "none", cursor: "pointer", color: "#5B6677", fontSize: "12px", lineHeight: 1, padding: "2px 4px" }}
+                >
+                  ✕
+                </button>
+              </div>
+              <p
+                style={{
+                  margin: 0,
+                  fontFamily: "Inter, -apple-system, sans-serif",
+                  fontSize: "12px",
+                  lineHeight: "1.6",
+                  color: "#7A8699",
+                  overflow: "hidden",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                }}
+              >
+                {selectedNodeDef.description}
+              </p>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="empty"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              style={{
+                position: "absolute",
+                inset: 0,
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
-                gap: "12px",
-                marginBottom: "6px",
+                paddingLeft: "4px",
               }}
             >
-              <span
-                style={{
-                  fontFamily: "Inter, -apple-system, sans-serif",
-                  fontWeight: 600,
-                  fontSize: "13px",
-                  color: selectedNodeDef.isAgent
-                    ? "#C4B5FD"
-                    : selectedNodeDef.isEval
-                    ? "#9BA6B8"
-                    : "#38BDF8",
-                }}
-              >
-                {selectedNodeDef.label}
+              <span style={{ fontFamily: "Inter, -apple-system, sans-serif", fontSize: "12px", color: "#3A4455" }}>
+                Click any node to learn what that stage does.
               </span>
-              <button
-                onClick={() => setSelectedNode(null)}
-                aria-label="Close"
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  color: "#5B6677",
-                  padding: "2px",
-                  lineHeight: 1,
-                  fontSize: "14px",
-                }}
-              >
-                ✕
-              </button>
-            </div>
-            <p
-              style={{
-                margin: 0,
-                fontFamily: "Inter, -apple-system, sans-serif",
-                fontSize: "12.5px",
-                lineHeight: "1.65",
-                color: "#9BA6B8",
-              }}
-            >
-              {selectedNodeDef.description}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* ── Legend ── */}
       <div

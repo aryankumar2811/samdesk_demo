@@ -23,7 +23,7 @@ const phases: Phase[] = [
     title: "Foundation",
     horizon: "This demo",
     thesis:
-      "Single investigative agent with real tool use — transparent, measurable, citation-backed.",
+      "Single investigative agent with real tool use, transparent, measurable, and citation-backed.",
     capabilities: [
       "Real Anthropic tool use",
       "Transparent TF-IDF clustering",

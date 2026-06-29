@@ -42,147 +42,147 @@ const escalateNodeStyle: React.CSSProperties = {
 // ─── Nodes ────────────────────────────────────────────────────────────────────
 
 const nodes: Node[] = [
-  // INGESTION LANE
+  // INGESTION LANE (x=0)
   {
     id: "n1",
     type: "default",
-    position: { x: 0, y: 50 },
+    position: { x: 0, y: 0 },
     data: { label: "Source Connectors\n(Social · News · Gov · Sensor · Partner)" },
     style: baseNodeStyle,
   },
   {
     id: "n2",
     type: "default",
-    position: { x: 0, y: 170 },
-    data: { label: "Streaming Bus\n(Kafka / SQS ← JD)" },
+    position: { x: 0, y: 150 },
+    data: { label: "Streaming Bus\n(Kafka / SQS)" },
     style: baseNodeStyle,
   },
   {
     id: "n3",
     type: "default",
-    position: { x: 0, y: 290 },
+    position: { x: 0, y: 300 },
     data: { label: "Preprocess\n(dedup · lang · translate)" },
     style: baseNodeStyle,
   },
 
-  // INTELLIGENCE LANE
+  // INTELLIGENCE LANE (x=270)
   {
     id: "n4",
     type: "default",
-    position: { x: 220, y: 50 },
+    position: { x: 270, y: 0 },
     data: { label: "Embeddings\nService" },
     style: baseNodeStyle,
   },
   {
     id: "n5",
     type: "default",
-    position: { x: 220, y: 150 },
-    data: { label: "Vector DB\n(RAG ← JD)" },
+    position: { x: 270, y: 150 },
+    data: { label: "Vector DB\n(RAG)" },
     style: baseNodeStyle,
   },
   {
     id: "n6",
     type: "default",
-    position: { x: 220, y: 260 },
-    data: { label: "Fine-tuned\nClassifier\n(GPU ← JD)" },
+    position: { x: 270, y: 280 },
+    data: { label: "Fine-tuned\nClassifier (GPU)" },
     style: baseNodeStyle,
   },
   {
     id: "n7",
     type: "default",
-    position: { x: 220, y: 360 },
+    position: { x: 270, y: 400 },
     data: { label: "Clustering\nService" },
     style: baseNodeStyle,
   },
 
-  // AGENT LANE
+  // AGENT LANE (x=540)
   {
     id: "n8",
     type: "default",
-    position: { x: 440, y: 160 },
+    position: { x: 540, y: 80 },
     data: { label: "Orchestration\nService" },
     style: baseNodeStyle,
   },
   {
     id: "n9",
     type: "default",
-    position: { x: 440, y: 50 },
-    data: { label: "Anthropic Claude\n(← JD)" },
+    position: { x: 540, y: 220 },
+    data: { label: "Anthropic Claude\n(primary LLM)" },
     style: agentNodeStyle,
   },
   {
     id: "n10",
     type: "default",
-    position: { x: 440, y: 260 },
-    data: { label: "OpenAI\n(← JD)" },
+    position: { x: 540, y: 360 },
+    data: { label: "OpenAI\n(fallback LLM)" },
     style: baseNodeStyle,
   },
   {
     id: "n11",
     type: "default",
-    position: { x: 560, y: 160 },
+    position: { x: 540, y: 490 },
     data: { label: "Tool Services\n(Corroboration · Source · Assets · Geo)" },
     style: baseNodeStyle,
   },
+
+  // GUARD + HUMAN LANE (x=820)
   {
     id: "n12",
     type: "default",
-    position: { x: 560, y: 280 },
+    position: { x: 820, y: 80 },
     data: { label: "Grounding\nGuard" },
     style: baseNodeStyle,
   },
-
-  // HUMAN-IN-LOOP LANE
   {
     id: "n13",
     type: "default",
-    position: { x: 680, y: 160 },
+    position: { x: 820, y: 280 },
     data: { label: "Analyst Review\nConsole\n(24/7 escalations)" },
     style: escalateNodeStyle,
   },
 
-  // DELIVERY LANE
+  // DELIVERY LANE (x=1080)
   {
     id: "n14",
     type: "default",
-    position: { x: 780, y: 100 },
+    position: { x: 1080, y: 100 },
     data: { label: "Routing\nEngine" },
     style: baseNodeStyle,
   },
   {
     id: "n15",
     type: "default",
-    position: { x: 900, y: 100 },
+    position: { x: 1080, y: 260 },
     data: { label: "Slack · Teams\nEmail · Everbridge\nEsri · API" },
     style: baseNodeStyle,
   },
 
-  // PLATFORM
+  // PLATFORM (y=600)
   {
     id: "n16",
     type: "default",
-    position: { x: 50, y: 460 },
-    data: { label: "S3 Object Storage (← JD)" },
+    position: { x: 0, y: 600 },
+    data: { label: "S3 Object Storage" },
     style: baseNodeStyle,
   },
   {
     id: "n17",
     type: "default",
-    position: { x: 280, y: 460 },
-    data: { label: "CloudWatch Observability (← JD)" },
+    position: { x: 270, y: 600 },
+    data: { label: "CloudWatch + Observability" },
     style: baseNodeStyle,
   },
   {
     id: "n18",
     type: "default",
-    position: { x: 530, y: 460 },
+    position: { x: 570, y: 600 },
     data: { label: "Eval Harness + Drift Monitor" },
     style: baseNodeStyle,
   },
   {
     id: "n19",
     type: "default",
-    position: { x: 740, y: 460 },
+    position: { x: 840, y: 600 },
     data: { label: "Audit Log / Provenance" },
     style: baseNodeStyle,
   },
@@ -191,29 +191,57 @@ const nodes: Node[] = [
 // ─── Edges ────────────────────────────────────────────────────────────────────
 
 const edgeDefaults = {
-  animated: true,
-  type: "smoothstep" as const,
-  style: { stroke: "rgba(56,189,248,0.5)", strokeWidth: 1.5 },
+  animated: false,
+  type: "step" as const,
+  style: { stroke: "rgba(56,189,248,0.4)", strokeWidth: 1.5 },
+};
+
+const agentLlmEdgeStyle = {
+  stroke: "rgba(167,139,250,0.5)",
+  strokeWidth: 1.5,
+};
+
+const platformEdgeStyle = {
+  stroke: "rgba(255,255,255,0.12)",
+  strokeWidth: 1,
+  strokeDasharray: "4 4",
 };
 
 const edges: Edge[] = [
+  // Ingestion stack
   { id: "e1-2",   source: "n1",  target: "n2",  ...edgeDefaults },
   { id: "e2-3",   source: "n2",  target: "n3",  ...edgeDefaults },
+  // Preprocess → intelligence
   { id: "e3-4",   source: "n3",  target: "n4",  ...edgeDefaults },
   { id: "e3-6",   source: "n3",  target: "n6",  ...edgeDefaults },
   { id: "e3-7",   source: "n3",  target: "n7",  ...edgeDefaults },
+  // Embeddings → vector DB
   { id: "e4-5",   source: "n4",  target: "n5",  ...edgeDefaults },
+  // Intelligence → orchestration
   { id: "e5-8",   source: "n5",  target: "n8",  ...edgeDefaults },
   { id: "e6-8",   source: "n6",  target: "n8",  ...edgeDefaults },
   { id: "e7-8",   source: "n7",  target: "n8",  ...edgeDefaults },
-  { id: "e8-9",   source: "n8",  target: "n9",  ...edgeDefaults },
-  { id: "e8-10",  source: "n8",  target: "n10", ...edgeDefaults },
+  // Orchestration → LLMs (highlighted)
+  { id: "e8-9",   source: "n8",  target: "n9",  ...edgeDefaults, style: agentLlmEdgeStyle },
+  { id: "e8-10",  source: "n8",  target: "n10", ...edgeDefaults, style: agentLlmEdgeStyle },
+  // Orchestration → tool services
   { id: "e8-11",  source: "n8",  target: "n11", ...edgeDefaults },
-  { id: "e11-12", source: "n11", target: "n12", ...edgeDefaults },
+  // LLM output → grounding guard
+  { id: "e9-12",  source: "n9",  target: "n12", ...edgeDefaults },
+  { id: "e10-12", source: "n10", target: "n12", ...edgeDefaults },
+  // Grounding → analyst escalation
   { id: "e12-13", source: "n12", target: "n13", ...edgeDefaults },
+  // Grounding → routing (verified)
   { id: "e12-14", source: "n12", target: "n14", ...edgeDefaults },
+  // Analyst approved → routing
   { id: "e13-14", source: "n13", target: "n14", ...edgeDefaults },
+  // Routing → notifications
   { id: "e14-15", source: "n14", target: "n15", ...edgeDefaults },
+  // Platform layer connections (dashed — infrastructure/observability)
+  { id: "ep2-16",  source: "n2",  target: "n16", animated: false, type: "step" as const, style: platformEdgeStyle },
+  { id: "ep8-17",  source: "n8",  target: "n17", animated: false, type: "step" as const, style: platformEdgeStyle },
+  { id: "ep12-18", source: "n12", target: "n18", animated: false, type: "step" as const, style: platformEdgeStyle },
+  { id: "ep14-19", source: "n14", target: "n19", animated: false, type: "step" as const, style: platformEdgeStyle },
 ];
 
 // ─── Table data ───────────────────────────────────────────────────────────────
@@ -272,7 +300,7 @@ function FlowDiagram() {
   return (
     <div
       style={{
-        height: "540px",
+        height: "680px",
         width: "100%",
         background: "var(--bg-base)",
         borderRadius: "12px",
@@ -355,7 +383,7 @@ export default function ProductionSection() {
               maxWidth: "680px",
             }}
           >
-            A proposed reference architecture — illustrative integration grounded
+            A proposed reference architecture, illustrative integration grounded
             in the public role description. Not the company&apos;s actual internal
             systems.
           </p>
@@ -543,7 +571,7 @@ export default function ProductionSection() {
               fontFamily: "var(--font-inter)",
             }}
           >
-            Provider-agnostic abstraction over Anthropic and OpenAI — route
+            Provider-agnostic abstraction over Anthropic and OpenAI. Route
             triage work to a cheaper model, high-stakes briefs to a frontier
             model. Every model upgrade is gated behind the eval harness: each new
             version must measurably beat the last on decision accuracy and

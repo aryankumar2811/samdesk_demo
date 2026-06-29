@@ -14,7 +14,7 @@ export interface DemoScenario {
 export const DEMO_SCENARIOS: DemoScenario[] = [
   {
     incidentId: "inc-001",
-    title: "Chemical Warehouse Fire — Port Halworth Docklands",
+    title: "Chemical Warehouse Fire: Port Halworth Docklands",
     description:
       "12 signals from 8 independent sources including official fire dispatch, AQI sensors, news wire, and partner intelligence. Strong multi-source corroboration.",
     expectedOutcome: "verified",
@@ -25,7 +25,7 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
   },
   {
     incidentId: "inc-002",
-    title: "Reported Active Threat — Verdana Stadium",
+    title: "Reported Active Threat: Verdana Stadium",
     description:
       "Initial reports from low-reliability account; official police, venue ops, and sensors all contradict. Content appears recycled from a 2019 incident.",
     expectedOutcome: "flag_misinformation",
@@ -36,9 +36,9 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
   },
   {
     incidentId: "inc-003",
-    title: "Flash Flood Watch — Calavera Bay Waterfront",
+    title: "Flash Flood Watch: Calavera Bay Waterfront",
     description:
-      "NWS watch is real, but one of three primary flood sensors is offline. Social reports conflict — one eyewitness reports overtopping, port authority sees normal conditions.",
+      "NWS watch is real, but one of three primary flood sensors is offline. Social reports conflict: one eyewitness reports overtopping, port authority sees normal conditions.",
     expectedOutcome: "escalate_to_human",
     location: "Calavera Bay, Waterfront Zone",
     signalCount: 8,
