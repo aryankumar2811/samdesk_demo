@@ -192,7 +192,7 @@ export async function* runAgent(incidentId: string): AsyncGenerator<AgentEvent> 
 
         // Check if this is submit_decision
         if (block.name === "submit_decision") {
-          const payload = toolInput as DecisionPayload;
+          const payload = toolInput as unknown as DecisionPayload;
 
           // Grounding guard (one revision allowed)
           const { faithful, faithfulness, ungrounded } = checkGrounding(
